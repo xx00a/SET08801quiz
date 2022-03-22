@@ -1,0 +1,118 @@
+html {
+    background-color: #deded8;
+    font-family: Arial, sans-serif;
+}
+body {
+
+}
+article, aside, footer, header {
+    padding: 0.6rem;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #0A7FEB;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+aside {
+    background-color: white;
+
+}
+
+/* completed */
+
+nav {
+    display: flex;
+    padding: 10px 0;
+    font-size: 14px;
+}
+nav apptitle
+{
+    text-align: left;
+    min-width: 20rem;
+    font-size: 24px;
+    padding-top: 10px;
+}
+nav a {
+    text-align: center;
+    margin: 5px;
+    padding: 15px 30px;
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #2A99FB;
+    border-radius: 2px;
+    outline: 1px solid #2A99FB;
+}
+
+/* side menu elements */
+sidemenu {
+    display: flex;
+    flex-direction: column;
+    color: #2899FB;
+    margin-top: 10px;
+}
+
+sidemenu sidetitle {
+    font-size: 16px;
+    padding: 8px 0px;
+
+}
+
+sidemenu a
+{
+    font-size: 14px;
+    padding: 7px 15px;
+    color: #2899FB;
+}
+
+sidemenu a:hover
+{
+    background-color: #F1F9FF;
+    outline: 1px solid #F1F9FF;
+}
+
+/* Interface elements */
+
+/* Article (main area) elements */
+
+article {
+    background-color: #ffffff;
+}
+h1 {
+    color: #2A99FB;
+    font-size: 28px;
+    margin-top: 10px;
+
+}
+
+
+
+/* larger screen */
+@media screen and (min-width: 30rem) {
+    body {
+        display: flex;
+        flex-direction: column;
+        max-width: 80rem;
+        margin: auto;
+    }
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        border-bottom: 0.5rem solid;
+    }
+    nav, header {
+        order: -1;
+    }
+    article {
+        flex: 75%;
+    }
+    aside {
+        flex: 25%;
+    }
+}
