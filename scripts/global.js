@@ -17,15 +17,13 @@ function cookieSet(name, value)
 
 function cookieRead(name)
 {
-    alert(document.cookie.split(";"));
-
-    document.cookie = "username=Debra White; path=/";
-
-    let cookies = document.cookie;
-    console.log(cookies);
-
-   // const cookieValue = document.cookie.split(";").find(row => row.startsWith(name + "=")).split("=")[1];
-
-    //return cookieValue;
+    const cookieName = name + "=";
+    const cDecoded = decodeURIComponent(document.cookie);
+    const cArr = cDecoded .split('; ');
+    let res;
+    cArr.forEach(val => {
+        if (val.indexOf(cookieName) === 0) res = val.substring(cookieName.length);
+    })
+    return res;
 
 }
