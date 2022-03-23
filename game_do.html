@@ -10,28 +10,6 @@
 <body>
 <script>
 
-    let timer = setInterval( function () {
-
-        let currentTime = new Date().getTime();
-        let delta = currentTime - countDownTime;
-        let secondsRemain = Math.floor(delta / 1000);
-
-        if (secondsRemain < 0)
-        {
-            // valid time
-            document.getElementById("app_countdown").innerHTML = Math.abs(secondsRemain) + " seconds remaining.";
-        }
-        else
-        {
-            clearInterval();
-            document.getElementById("app_countdown").innerHTML = (secondsRemain) + " seconds remaining.";
-
-        }
-
-
-        }
-        ,1000);
-
     // if it equals =
 
     // show timeout function
@@ -49,7 +27,7 @@
         <nav>
             <apptitle>SET08801 Jeopardy!</apptitle>
             <a href="index.html">Home</a>
-            <a href="game.html">Game</a>
+            <a href="game.html" style="background-color: #2A99FB;">Game</a>
             <a href="results.html">Results</a>
             <a href="help.html">Help</a>
         </nav>
@@ -58,16 +36,16 @@
     <aside>
         <sidemenu>
             <sidetitle>Total: £0</sidetitle>
-            <a href="index.html">Question 1</a>
-            <a href="index.html">Question 2</a>
-            <a href="index.html">Question 3</a>
-            <a href="index.html">Question 4</a>
-            <a href="index.html">Question 5</a>
-            <a href="index.html">Question 6</a>
-            <a href="index.html">Question 7</a>
-            <a href="index.html">Question 8</a>
-            <a href="index.html">Question 9</a>
-            <a href="index.html">Question 10</a>
+            <a href="index.html" id="question1_link">Question 1</a>
+            <a href="index.html" id="question2_link">Question 1</a>
+            <a href="index.html" id="question3_link">Question 1</a>
+            <a href="index.html" id="question4_link">Question 1</a>
+            <a href="index.html" id="question5_link">Question 1</a>
+            <a href="index.html" id="question6_link">Question 1</a>
+            <a href="index.html" id="question7_link">Question 1</a>
+            <a href="index.html" id="question8_link">Question 1</a>
+            <a href="index.html" id="question9_link">Question 1</a>
+            <a href="index.html" id="question10_link">Question 1</a>
         </sidemenu>
     </aside>
     <article>
