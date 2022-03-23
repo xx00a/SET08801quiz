@@ -11,7 +11,7 @@ function cookieSet(name, value)
     //set the cookie
     document.cookie = name + "=" + value + "; expires=" + theDate.toUTCString() + "; path=/";
 
-    alert(name + "=" + value + "; expires=" + theDate.toUTCString() + "; path=/");
+    //alert(name + "=" + value + "; expires=" + theDate.toUTCString() + "; path=/");
 
 }
 
@@ -26,4 +26,12 @@ function cookieRead(name)
     })
     return res;
 
+}
+
+function gameSet(name)
+{
+    alert(name);
+    cookieSet("game",Math.random());
+    cookieSet("game_name",name);
+    window.location = "game_do.html";
 }
