@@ -71,13 +71,14 @@ sidemenu a
     font-size: 14px;
     padding: 7px 15px;
     color: #2899FB;
+    border-radius: 5px;
 }
 
 sidemenu a:hover
 {
     background-color: #F1F9FF;
     outline: 1px solid #F1F9FF;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 /* Interface elements */
@@ -93,6 +94,12 @@ article {
 h1 {
     color: #2A99FB;
     font-size: 28px;
+    margin-top: 10px;
+
+}
+h2 {
+    color: #5d5d5d;
+    font-size: 22px;
     margin-top: 10px;
 
 }
@@ -139,9 +146,9 @@ input[type=text], input[type=submit]
         order: -1;
     }
     article {
-        flex: 75%;
+        flex: 80%;
     }
     aside {
-        flex: 25%;
+        flex: 20%;
     }
 }

@@ -8,21 +8,6 @@
     <title>Jeopardy! - Game</title>
 </head>
 <body>
-<script>
-
-    // if it equals =
-
-    // show timeout function
-    // submit answer atuomatically
-
-
-
-//    clearInterval(myInterval);
-
-
-
-    // cookieSet("game",Math.random());
-</script>
 <header>
         <nav>
             <apptitle>SET08801 Jeopardy!</apptitle>
@@ -35,27 +20,27 @@
 <main>
     <aside>
         <sidemenu>
-            <sidetitle>Total: £0</sidetitle>
-            <a href="index.html" id="question1_link">Question 1</a>
-            <a href="index.html" id="question2_link">Question 1</a>
-            <a href="index.html" id="question3_link">Question 1</a>
-            <a href="index.html" id="question4_link">Question 1</a>
-            <a href="index.html" id="question5_link">Question 1</a>
-            <a href="index.html" id="question6_link">Question 1</a>
-            <a href="index.html" id="question7_link">Question 1</a>
-            <a href="index.html" id="question8_link">Question 1</a>
-            <a href="index.html" id="question9_link">Question 1</a>
-            <a href="index.html" id="question10_link">Question 1</a>
+            <sidetitle id="score-total">&nbsp;</sidetitle>
+            <a href="javascript:playQuestion(1);" id="question1_link">Question 1</a>
+            <a href="javascript:playQuestion(2);" id="question2_link">Question 2</a>
+            <a href="javascript:playQuestion(3);" id="question3_link">Question 3</a>
+            <a href="index.html" id="question4_link">Question 4</a>
+            <a href="index.html" id="question5_link">Question 5</a>
+            <a href="index.html" id="question6_link">Question 6</a>
+            <a href="index.html" id="question7_link">Question 7</a>
+            <a href="index.html" id="question8_link">Question 8</a>
+            <a href="index.html" id="question9_link">Question 9</a>
+            <a href="index.html" id="question10_link">Question 10</a>
         </sidemenu>
     </aside>
     <article>
-        <h1>Welcome to Jeopardy!</h1>
-        <p id="app_countdown">Countdown:</p>
-
-        <p>Please enter your name to start a new game:</p>
+        <h1 id="app_question_no"></h1>
+        <h2 id="app_question_cat"></h2>
+        <h3 id="app_countdown">&nbsp;</h3>
+        <p id="app_question"></p>
         <form action="game_do.html" method="post">
-            <input type="text" value="" name="playerName"/>
-            <input type="button" onClick="javascript: let countDownTime = new Date();" value="Test">
+            Answer: <input size="45" type="text" value="" name="playerResponse"/>
+            <input type="button" onclick="submitQuestion();" value="Submit">
         </form>
 
 
@@ -66,5 +51,23 @@
 <footer>
     <p>Copyright &#169; 2017 <a href="/">My Site</a></p>
 </footer>
+<script>
+
+    startGame(cookieRead("game_name"), cookieRead("game_number"));
+
+    // if it equals =
+
+    // show timeout function
+    // submit answer atuomatically
+
+
+
+    //    clearInterval(myInterval);
+
+
+
+    // cookieSet("game",Math.random());
+</script>
+
 </body>
 </html>
