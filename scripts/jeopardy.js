@@ -28,7 +28,7 @@ function titleCase(str) {
 // set timer
 let currentTime = new Date();
 let countDownTime = new Date();
-countDownTime.setTime(currentTime.getTime() + 9000);
+//countDownTime.setTime(currentTime.getTime() + 800000);
 
 let globalTimer;
 
@@ -37,11 +37,17 @@ function countDown()
         let currentIntTime = new Date().getTime();
         let delta = currentIntTime - countDownTime;
         let secondsRemain = Math.floor(delta / 1000);
+        let absSecondsRemain = Math.abs(secondsRemain);
 
-        if (secondsRemain < 0)
+        if (absSecondsRemain < 15)
+        {
+                document.getElementById("app_msg").style.color = "red";
+        }
+
+        if (absSecondsRemain > 0)
         {
             // valid time
-            document.getElementById("app_countdown").innerHTML = Math.abs(secondsRemain) + " seconds remaining.";
+            document.getElementById("app_msg").innerText = absSecondsRemain + " seconds remain";
         }
         else
         {
@@ -55,6 +61,15 @@ function countDown()
 function startGame(name,gameNumber)
 {
 
+    // draw menus
+    // read cookie to highlight status
+
+    // draw opening page
+    // playIntro();
+    cookieSet("intro-played","true");
+
+    // start first availible question (go in a loop to find first quesiton to select)
+    // call playQuestion when ready to go
 }
 
 function playQuestion(questionNo)
@@ -69,16 +84,16 @@ function playQuestion(questionNo)
     else
     {
         // reset time variables
-
         currentTime = new Date();
         countDownTime = new Date();
-        countDownTime.setTime(currentTime.getTime() + 9000);
+        countDownTime.setTime(currentTime.getTime() + 30000);
 
         // update current question
         currentQuestion = questionNo;
 
         // startTheGame
         doQuestion(currentQuestion);
+        cookieSet("app-game-question",currentQuestion);
 
     }
 }
@@ -113,13 +128,19 @@ function doQuestion(questionNo)
 
         // update current answer - we convert to lower case to make it non case sensitive
         currentAnswer = questionData[0]['answer'];
-        currentAnswer.toLowerCase();
 
         // update value of answer
         currentValue = questionData[0]['value'];
 
+        //start audio
+        document.getElementById("audio-idle").pause();
+        document.getElementById("audio-idle").currentTime = 0;
+        document.getElementById("audio-idle").play();
+
         // update interface
-        document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
+        document.getElementById("app_msg").innerText = "30 seconds remain";
+        document.getElementById("app_msg").style.color = "green";
+        document.getElementById("gameform").style.visibility = "visible";
         document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
         document.getElementById("app_question_no").innerHTML = "Question "+currentQuestion;
         document.getElementById("app_question_cat").innerHTML = "Category is "+titleCase(questionData[0]['category']['title']) + " for £" + questionData[0]['value'];
@@ -136,14 +157,25 @@ function submitQuestion () {
 
     // stop the timer and display
     clearInterval(globalTimer);
-    document.getElementById("app_countdown").innerHTML = "&nbsp;";
 
-    // let's update our answer
+    //stop audio
+    document.getElementById("audio-idle").pause();
+    document.getElementById("audio-idle").currentTime = 0;
+
+    // update interface
+    document.getElementById("gameform").style.visibility = "hidden";
+    document.getElementById("app_msg").style.color = "black";
+    document.getElementById("app_msg").innerHTML = "<strong>The answer is: </strong>" +currentAnswer+"";
+
+
+    // convert answer for comparison
     let theAnswer = document.getElementsByName('playerResponse')[0].value;
-    cookieSet("app-question-"+currentQuestion+"value",theAnswer);
-    theAnswer.toLowerCase();
+    let currentAnswerTmp = currentAnswer.toLowerCase();
 
-    if (theAnswer === currentAnswer)
+    cookieSet("app-question-"+currentQuestion+"value",theAnswer);
+    theAnswer = theAnswer.toLowerCase();
+
+    if (theAnswer === currentAnswerTmp)
     {
         // do celebration
         playWin();
@@ -164,8 +196,11 @@ function submitQuestion () {
 
     }
 
-    inPlay = false;
+    // update score and clear answer
+    document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
+    document.getElementsByName('playerResponse')[0].value = "";
 
+    inPlay = false;
 
 }
 
@@ -173,20 +208,41 @@ function playWin()
 {
     // update elements
     document.getElementById("question"+currentQuestion+"_link").style.backgroundColor = "#f1fff8";
+    document.getElementById("app_msg").style.color = "green";
 
+    // play winning layer
+    document.getElementById("layer-win").style.visibility = "visible";
 
-    alert("you win");
-
-    // after
+    //start video
+    document.getElementById("video-win").play();
 
 }
 
 function playLoser()
 {
     ///
-
     document.getElementById("question"+currentQuestion+"_link").style.backgroundColor = "#fff1f1";
+    document.getElementById("app_msg").style.color = "red";
 
+    // play winning layer
+    document.getElementById("layer-lose").style.visibility = "visible";
+
+    //start video
+    document.getElementById("video-lose").play();
 
 }
 
+function hideVideo()
+{
+    // reset all videos
+    document.getElementById("layer-win").style.visibility = "hidden";
+    document.getElementById("video-win").pause();
+    document.getElementById("video-win").currentTime = 0;
+
+    // reset all videos
+    document.getElementById("layer-lose").style.visibility = "hidden";
+    document.getElementById("video-lose").pause();
+    document.getElementById("video-lose").currentTime = 0;
+
+
+}

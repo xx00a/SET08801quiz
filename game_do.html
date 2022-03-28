@@ -36,9 +36,9 @@
     <article>
         <h1 id="app_question_no"></h1>
         <h2 id="app_question_cat"></h2>
-        <h3 id="app_countdown">&nbsp;</h3>
-        <p id="app_question"></p>
-        <form action="game_do.html" method="post">
+        <p id="app_question">&nbsp;</p>
+        <p id="app_msg">&nbsp;</p>
+        <form action="game_do.html" method="post" id="gameform" style="visibility: hidden;">
             Answer: <input size="45" type="text" value="" name="playerResponse"/>
             <input type="button" onclick="submitQuestion();" value="Submit">
         </form>
@@ -68,6 +68,22 @@
 
     // cookieSet("game",Math.random());
 </script>
-
+<div id="layer-timer" style="visibility: hidden;">
+    <audio id="audio-idle">
+        <source src="assets/JeopardyIdle.mp3" type="audio/mpeg">
+    </audio>
+</div>
+<div id="layer-win" class="videoDialog" style="visibility: hidden;">
+    <video preload="auto" id="video-win">
+        <source src="assets/JeopardyWin.mp4" type="video/mp4">
+    </video>
+    <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
+</div>
+<div id="layer-lose" class="videoDialog" style="visibility: hidden;">
+    <video preload="auto" id="video-lose">
+        <source src="assets/JeopardyWrong.mp4" type="video/mp4">
+    </video>
+    <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
+</div>
 </body>
 </html>
