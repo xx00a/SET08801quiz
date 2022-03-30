@@ -38,12 +38,15 @@
         <h2 id="app_question_cat"></h2>
         <p id="app_question">&nbsp;</p>
         <p id="app_msg">&nbsp;</p>
-        <form action="game_do.html" method="post" id="gameform" style="visibility: hidden;">
+        <form action="game_do.html" id="gameform" style="visibility: hidden;">
             Answer: <input size="45" type="text" value="" name="playerResponse"/>
             <input type="button" onclick="submitQuestion();" value="Submit">
         </form>
-
-
+        <form action="game_do.html" id="gamenext" style="visibility: hidden;">
+            <input type="button" onclick="playQuestion();" value="Next Question &gt;">
+        </form>
+        <form action="game_do.html" id="gameend" style="visibility: hidden;">
+            <input type="button" onclick="finishGame();" value="Finish Game &gt;">
         </form>
     </article>
 </main>

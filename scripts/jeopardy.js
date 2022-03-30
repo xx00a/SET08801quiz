@@ -4,7 +4,12 @@ let currentQuestion = parseInt( cookieRead('app-game-question') );
 let currentScore = parseInt( cookieRead('app-game-score') );
 let currentAnswer = "";
 let currentValue = 0;
+let questionsExhausted = false;
 let inPlay = false;
+
+// question completion tracker
+const questionsComplete = [false,false,false,false,false,false,false,false,false,false,false];
+
 
 if (isNaN(currentQuestion))
 {
@@ -74,34 +79,63 @@ function startGame(name,gameNumber)
 
 function playQuestion(questionNo)
 {
-    ///
-    //window.location = "game_do.html";
+    let activeQuestionNo = 1;
 
-    if (inPlay)
+    // let's determine the next free question to select
+    if (isNaN(questionNo))
     {
-        alert("You need to answer the question before choosing a new question.");
+        let qLen = questionsComplete.length;
+
+
+        for (let i = 0; i < qLen; i++) {
+            if (questionsComplete[qLen] === true)
+            {
+                activeQuestionNo = i + 1;
+                break;
+            }
+        }
+    }
+
+    alert(activeQuestionNo);
+
+
+
+
+    if (questionNo < 11)
+    {
+        if (inPlay)
+        {
+            alert("You need to answer the question before choosing a new question.");
+        }
+        else
+        {
+            // reset time variables
+            currentTime = new Date();
+            countDownTime = new Date();
+            countDownTime.setTime(currentTime.getTime() + 30000);
+
+            // update current question
+            currentQuestion = questionNo;
+
+            // startTheGame
+            doQuestion(currentQuestion);
+            cookieSet("app-game-question",currentQuestion);
+
+        }
+
     }
     else
     {
-        // reset time variables
-        currentTime = new Date();
-        countDownTime = new Date();
-        countDownTime.setTime(currentTime.getTime() + 30000);
-
-        // update current question
-        currentQuestion = questionNo;
-
-        // startTheGame
-        doQuestion(currentQuestion);
-        cookieSet("app-game-question",currentQuestion);
-
+        // let's exit the game
     }
+
 }
 
 
 
 function doQuestion(questionNo)
 {
+
     // we need to check cookie to see if question has been completed
     let questionDone = cookieRead("app-question-"+questionNo+"done");
 
@@ -114,9 +148,7 @@ function doQuestion(questionNo)
     }
     else
     {
-
-
-        // start timer and game
+   // start timer and game
         globalTimer = setInterval( countDown,1000);
         inPlay = true;
 
@@ -146,10 +178,10 @@ function doQuestion(questionNo)
         document.getElementById("app_question_cat").innerHTML = "Category is "+titleCase(questionData[0]['category']['title']) + " for £" + questionData[0]['value'];
         document.getElementById("question"+currentQuestion+"_link").style.backgroundColor = "#F1F9FF";
         document.getElementById("app_question").innerHTML = questionData[0]['question'] + ":";
+        document.getElementById("gamenext").style.visibility = "hidden";
+
 
     }
-
-
 
 }
 
@@ -199,6 +231,20 @@ function submitQuestion () {
     // update score and clear answer
     document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
     document.getElementsByName('playerResponse')[0].value = "";
+
+    if (questionsExhausted)
+    {
+        document.getElementById("gameend").style.visibility = "visible";
+    }
+    else
+    {
+        document.getElementById("gamenext").style.visibility = "visible";
+    }
+
+
+
+    // update index table
+    questionsComplete[currentQuestion-1] = true;
 
     inPlay = false;
 
