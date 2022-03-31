@@ -24,53 +24,36 @@
             <a href="javascript:playQuestion(1);" id="question1_link">Question 1</a>
             <a href="javascript:playQuestion(2);" id="question2_link">Question 2</a>
             <a href="javascript:playQuestion(3);" id="question3_link">Question 3</a>
-            <a href="index.html" id="question4_link">Question 4</a>
-            <a href="index.html" id="question5_link">Question 5</a>
-            <a href="index.html" id="question6_link">Question 6</a>
-            <a href="index.html" id="question7_link">Question 7</a>
-            <a href="index.html" id="question8_link">Question 8</a>
-            <a href="index.html" id="question9_link">Question 9</a>
-            <a href="index.html" id="question10_link">Question 10</a>
+            <a href="javascript:playQuestion(4);" id="question4_link">Question 4</a>
+            <a href="javascript:playQuestion(5);" id="question5_link">Question 5</a>
+            <a href="javascript:playQuestion(6);" id="question6_link">Question 6</a>
+            <a href="javascript:playQuestion(7);" id="question7_link">Question 7</a>
+            <a href="javascript:playQuestion(8);" id="question8_link">Question 8</a>
+            <a href="javascript:playQuestion(9);" id="question9_link">Question 9</a>
+            <a href="javascript:playQuestion(10);" id="question10_link">Question 10</a>
         </sidemenu>
     </aside>
     <article>
+        <a href="javascript:finishGame();">finihsh &gt;</a>
         <h1 id="app_question_no"></h1>
         <h2 id="app_question_cat"></h2>
         <p id="app_question">&nbsp;</p>
         <p id="app_msg">&nbsp;</p>
-        <form action="game_do.html" id="gameform" style="visibility: hidden;">
+        <div id="gameform" style="visibility: hidden;">
             Answer: <input size="45" type="text" value="" name="playerResponse"/>
-            <input type="button" onclick="submitQuestion();" value="Submit">
-        </form>
-        <form action="game_do.html" id="gamenext" style="visibility: hidden;">
+            <input type="submit" onclick="submitQuestion();" value="Submit">
+        </div>
+        <div id="gamenext" style="visibility: hidden;">
             <input type="button" onclick="playQuestion();" value="Next Question &gt;">
-        </form>
-        <form action="game_do.html" id="gameend" style="visibility: hidden;">
+        </div>
+        <div id="gameend" style="visibility: hidden;">
             <input type="button" onclick="finishGame();" value="Finish Game &gt;">
-        </form>
+        </div>
     </article>
 </main>
-
 <footer>
     <p>Copyright &#169; 2017 <a href="/">My Site</a></p>
 </footer>
-<script>
-
-    startGame(cookieRead("game_name"), cookieRead("game_number"));
-
-    // if it equals =
-
-    // show timeout function
-    // submit answer atuomatically
-
-
-
-    //    clearInterval(myInterval);
-
-
-
-    // cookieSet("game",Math.random());
-</script>
 <div id="layer-timer" style="visibility: hidden;">
     <audio id="audio-idle">
         <source src="assets/JeopardyIdle.mp3" type="audio/mpeg">
@@ -88,5 +71,8 @@
     </video>
     <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
 </div>
+<script>
+    startGame(cookieRead("game_name"), cookieRead("game_number"));
+</script>
 </body>
 </html>
