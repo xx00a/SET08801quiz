@@ -44,7 +44,7 @@
             <input type="submit" onclick="submitQuestion();" value="Submit">
         </div>
         <div id="gamenext" style="visibility: hidden;">
-            <input type="button" onclick="playQuestion();" value="Next Question &gt;">
+            <input id="nextBtn" type="button" onclick="playQuestion();" value="Next Question &raquo;">
         </div>
         <div id="gameend" style="visibility: hidden;">
             <input type="button" onclick="finishGame();" value="Finish Game &gt;">
@@ -60,13 +60,13 @@
     </audio>
 </div>
 <div id="layer-win" class="videoDialog" style="visibility: hidden;">
-    <video preload="auto" id="video-win">
+    <video preload="auto" id="video-win" onclick="hideVideo();" width="320" height="240">
         <source src="assets/JeopardyWin.mp4" type="video/mp4">
     </video>
     <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
 </div>
 <div id="layer-lose" class="videoDialog" style="visibility: hidden;">
-    <video preload="auto" id="video-lose">
+    <video preload="auto" id="video-lose" onclick="hideVideo();">
         <source src="assets/JeopardyWrong.mp4" type="video/mp4">
     </video>
     <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>

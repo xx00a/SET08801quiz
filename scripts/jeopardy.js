@@ -1,5 +1,4 @@
 
-
 // global variables and default data for the game session
 let currentGameName = cookieRead('game_name');
 let currentGameNo = parseInt(cookieRead('game_number'));
@@ -11,19 +10,18 @@ let currentValue = 0;
 let questionsExhausted = false;
 let inPlay = false;
 let questionsComplete = [false,false,false,false,false,false,false,false,false,false,false];
-let questionsScore = [0,0,0,0,0,0,0,0,0,0,0];
 let questionsTime = [0,0,0,0,0,0,0,0,0,0,0];
 let globalScoreboard = [
     // final score, questions answered, name, date/time, time taken
     [0,0,'Name','Date/Time',0],
     [0,0,'Name','Date/Time',0],
+    [50,0,'Name','Date/Time',0],
     [0,0,'Name','Date/Time',0],
+    [70,0,'Name','Date/Time',0],
     [0,0,'Name','Date/Time',0],
+    [30,0,'Name','Date/Time',0],
     [0,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
+    [10,0,'Name','Date/Time',0],
     [0,0,'Name','Date/Time',0],
 ];
 
@@ -124,10 +122,6 @@ function playQuestion(questionNo)
         }
     }
 
-    if (questionNo > 10) { activeQuestionNo = 11;}
-
-    alert('aq'+activeQuestionNo);
-
     switch (activeQuestionNo)
     {
         case -2:
@@ -169,12 +163,11 @@ function finishGame()
 {
     // let's sum our values up
     let qCLen = questionsComplete.length;
-    let qSLen = questionsScore.length;
     let qTLen = questionsTime.length;
     let sBLen = globalScoreboard.length;
 
     let sumQuestions = 0;
-    let sumScore = 0;
+    let sumScore = currentScore;
     let sumTime = 0;
 
     // how many questions answered?
@@ -185,42 +178,37 @@ function finishGame()
         }
     }
 
-    // tally score?
-    for (let i = 1; i < qSLen; i++) {
-        sumScore = sumScore + questionsScore[i];
-    }
-
-    // tally time
+    // total seconds
     for (let i = 1; i < qTLen; i++) {
-            sumTime = sumTime + questionsTime[i];
+        sumTime = sumTime + questionsTime[i];
     }
 
     // let's read our master cookies, put them in an array and sort
     for (let i = 0; i < sBLen; i++) {
         // final score, questions answered, name, date/time, time taken
-        globalScoreboard[i][0] = parseInt(cookieRead('scoreboard_'+i+'_score'));
+       /* globalScoreboard[i][0] = parseInt(cookieRead('scoreboard_'+i+'_score'));
         globalScoreboard[i][1] = parseInt(cookieRead('scoreboard_'+i+'_questions'));
         globalScoreboard[i][2] = cookieRead('scoreboard_'+i+'_name');
         globalScoreboard[i][3] = cookieRead('scoreboard_'+i+'_date');
-        globalScoreboard[i][4] = parseInt(cookieRead('scoreboard_'+i+'_time'));
+        globalScoreboard[i][4] = parseInt(cookieRead('scoreboard_'+i+'_time')); */
     }
 
     // sort results
-    globalScoreboard.sort(function(a,b) {return a[0]-b[0]});
+    globalScoreboard.sort(function(a,b) {return b[0]-a[0]});
 
     // let's add our latest result if the lowest value is higher
-    let tempLowestScore = globalScoreboard[0][0];
+    let tempLowestScore = globalScoreboard[9][0];
 
     if (isNaN(tempLowestScore)) { tempLowestScore = 0; }
 
-    if (tempLowestScore < sumScore)
+    if (sumScore > tempLowestScore)
     {
         let winDate = new Date();
-        globalScoreboard[0][0] = sumScore;
-        globalScoreboard[0][1] = sumQuestions;
-        globalScoreboard[0][2] = currentGameName;
-        globalScoreboard[0][3] = winDate.toUTCString();
-        globalScoreboard[0][4] = sumTime;
+        globalScoreboard[9][0] = sumScore;
+        globalScoreboard[9][1] = sumQuestions;
+        globalScoreboard[9][2] = currentGameName;
+        globalScoreboard[9][3] = winDate.toUTCString();
+        globalScoreboard[9][4] = sumTime;
     }
 
     // let's write our scoreboard to... cookies
@@ -236,6 +224,11 @@ function finishGame()
 
     console.table(globalScoreboard);
 
+    globalScoreboard.sort(function(a,b) {return b[0]-a[0]});
+
+    console.table(globalScoreboard);
+
+    alert('game over');
 
     //window.location = "game_finish.html";
 }
@@ -264,7 +257,7 @@ function doQuestion(questionNo)
 
         const questionData = JSON.parse(rawQuestionData);
 
-        // update current answer - we convert to lower case to make it non case sensitive
+        // update current answer - we convert to lower case to make it non-case-sensitive
         currentAnswer = questionData[0]['answer'];
 
         // update value of answer
@@ -305,13 +298,17 @@ function submitQuestion () {
     document.getElementById("app_msg").style.color = "black";
     document.getElementById("app_msg").innerHTML = "<strong>The answer is: </strong>" +currentAnswer+"";
 
+    // let's guide the user to end the game
+    if (currentQuestion === 10)
+    {
+        document.getElementById("nextBtn").style.backgroundColor = "green";
+        document.getElementById("nextBtn").value = "Finish Game";
+    }
+
 
     // convert answer for comparison
     let theAnswer = document.getElementsByName('playerResponse')[0].value;
     let currentAnswerTmp = currentAnswer.toLowerCase();
-
-
-    //cookieSet("app-question-"+currentQuestion+"value",theAnswer);
 
     theAnswer = theAnswer.toLowerCase();
 
@@ -324,6 +321,7 @@ function submitQuestion () {
         document.getElementById("question"+currentQuestion+"_link").innerText = "Question " + currentQuestion + ": £" + currentValue;
         currentScore = currentScore + currentValue;
 
+
     }
     else
     {
@@ -333,6 +331,8 @@ function submitQuestion () {
         // update master variables
         document.getElementById("question"+currentQuestion+"_link").innerText = "Question " + currentQuestion + ": £0";
         currentScore = currentScore - currentValue;
+
+        if (currentScore < 0) { currentScore = 0; }
 
     }
 
@@ -356,7 +356,6 @@ function submitQuestion () {
 
     // let's record our results so we can digest later
     questionsComplete[currentQuestion] = true;
-    questionsScore[currentQuestion] = currentValue;
     questionsTime[currentQuestion] = currentSeconds;
 
     inPlay = false;

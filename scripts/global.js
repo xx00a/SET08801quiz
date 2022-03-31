@@ -31,7 +31,7 @@ function cookieRead(name)
 function gameSet(name)
 {
     alert(name);
-    cookieSet("game_number",Math.random());
+    cookieSet("game_number",Math.random()*1000);
     cookieSet("game_name",name);
     window.location = "game_do.html";
 }
