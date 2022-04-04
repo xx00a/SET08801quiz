@@ -28,6 +28,13 @@ function cookieRead(name)
 
 }
 
+function showResults()
+{
+    // show final amount on results page
+    document.getElementById("gamefinal").innerText = 'Your final score was £' + cookieRead('game_final_score');
+
+}
+
 function fillResults()
 {
     const theArticle = document.querySelector('article');
@@ -127,6 +134,7 @@ function gameSet(name)
 
     cookieSet("game_number",Math.random());
     cookieSet("game_name",name);
+    cookieSet("game_final_score",0);
 
     window.location = "game_do.html";
 }

@@ -233,10 +233,7 @@ function finishGame()
         cookieSet('scoreboard_'+i+'_time',globalScoreboard[i][4]);
     }
 
-
-    alert('game over');
-
-    //window.location = "game_finish.html";
+    window.location = "game_finish.html";
 }
 
 async function getJSONfromJeopardy()
