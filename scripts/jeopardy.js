@@ -13,16 +13,16 @@ let questionsComplete = [false,false,false,false,false,false,false,false,false,f
 let questionsTime = [0,0,0,0,0,0,0,0,0,0,0];
 let globalScoreboard = [
     // final score, questions answered, name, date/time, time taken
-    [0,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [50,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [70,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [30,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
-    [10,0,'Name','Date/Time',0],
-    [0,0,'Name','Date/Time',0],
+    [0,0,'','',0],
+    [0,0,'','',0],
+    [50,0,'','',0],
+    [0,0,'','',0],
+    [70,0,'','',0],
+    [0,0,'','',0],
+    [30,0,'','',0],
+    [0,0,'','',0],
+    [10,0,'','',0],
+    [0,0,'','',0],
 ];
 
 // end of variables

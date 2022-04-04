@@ -83,7 +83,7 @@ function fillResults()
         const aCell4 = document.createElement('td');
         const aCell5 = document.createElement('td');
 
-        if (isNaN(cookieRead('scoreboard_'+i+'_date')))
+        if ( cookieRead('scoreboard_'+i+'_date') === '')
         {
             // we know there is no data
             aCellR.textContent = i + 1;
