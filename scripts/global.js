@@ -81,7 +81,7 @@ function fillResults()
         const aCell4 = document.createElement('td');
         const aCell5 = document.createElement('td');
 
-        if  (typeof cookieRead('scoreboard_'+i+'_score') !== 'undefined') {
+        if  (typeof cookieRead('scoreboard_'+i+'_date') !== 'undefined') {
 
             aCellR.textContent = i + 1;
             aCell1.textContent = '£' + cookieRead('scoreboard_' + i + '_score');

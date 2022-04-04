@@ -235,6 +235,28 @@ function finishGame()
     //window.location = "game_finish.html";
 }
 
+async function getJSONfromJeopardy()
+{
+    const debugReturn = '[{"id":107928,"answer":"Eggo (Eggos accepted)","question":"With varieties like Blueberry \u0026 Nutri-Grain Cinnamon, these waffles from Kelloggs have you going in circles","value":600,"airdate":"2010-09-29T12:00:00.000Z","created_at":"2014-02-14T02:14:47.008Z","updated_at":"2014-02-14T02:14:47.008Z","category_id":14608,"game_id":null,"invalid_count":null,"category":{"id":14608,"title":"a freezer full of food","created_at":"2014-02-14T02:14:46.240Z","updated_at":"2014-02-14T02:14:46.240Z","clues_count":5}}]';
+//    const debugReturn = '[{"id":115334,"answer":"a Ring","question":"From Topps, this item that you wear on your finger has a \\"gem\\" made of candy","value":400,"airdate":"2013-07-29T12:00:00.000Z","created_at":"2014-02-14T02:44:56.527Z","updated_at":"2014-02-14T02:44:56.527Z","category_id":15727,"game_id":null,"invalid_count":null,"category":{"id":15727,"title":"candy is dandy","created_at":"2014-02-14T02:44:56.145Z","updated_at":"2014-02-14T02:44:56.145Z","clues_count":10}}]';
+    //const pointerURL = 'https://jservice.io/api/random?count=1';
+    //const pointerURL = 'https://jservice.io/api/random?count=1';
+
+
+    const theRequest = new Request(pointerURL);
+
+    const aResponse = await fetch(theRequest);
+
+    //console.log(await aResponse.text());
+
+    const jeopardyData = await aResponse.json();
+
+
+
+    return debugReturn;
+}
+
+
 function doQuestion(questionNo)
 {
 
@@ -255,7 +277,7 @@ function doQuestion(questionNo)
         inPlay = true;
 
         // call jSon data
-        const rawQuestionData ='[{"id":115334,"answer":"a Ring","question":"From Topps, this item that you wear on your finger has a \\"gem\\" made of candy","value":400,"airdate":"2013-07-29T12:00:00.000Z","created_at":"2014-02-14T02:44:56.527Z","updated_at":"2014-02-14T02:44:56.527Z","category_id":15727,"game_id":null,"invalid_count":null,"category":{"id":15727,"title":"candy is dandy","created_at":"2014-02-14T02:44:56.145Z","updated_at":"2014-02-14T02:44:56.145Z","clues_count":10}}]';
+        const rawQuestionData = getJSONfromJeopardy();
 
         const questionData = JSON.parse(rawQuestionData);
 
