@@ -89,23 +89,25 @@ function fillResults()
         const aCell5 = document.createElement('td');
 
         if  (typeof cookieRead('scoreboard_'+i+'_date') !== 'undefined') {
+            if  ( cookieRead('scoreboard_'+i+'_score') > 0) {
+                aCellR.textContent = i + 1;
+                aCell1.textContent = '£' + cookieRead('scoreboard_' + i + '_score');
+                aCell2.textContent = cookieRead('scoreboard_' + i + '_questions') + ' completed';
+                aCell3.textContent = cookieRead('scoreboard_' + i + '_name');
+                aCell4.textContent = cookieRead('scoreboard_' + i + '_date');
+                aCell5.textContent = cookieRead('scoreboard_' + i + '_time') + ' seconds';
+            }
+            else {
+                aCellR.textContent = i + 1;
+                aCell1.textContent = '';
+                aCell2.textContent = '';
+                aCell3.textContent = '';
+                aCell4.textContent = '';
+                aCell5.textContent = '';
 
-            aCellR.textContent = i + 1;
-            aCell1.textContent = '£' + cookieRead('scoreboard_' + i + '_score');
-            aCell2.textContent = cookieRead('scoreboard_' + i + '_questions') + ' completed';
-            aCell3.textContent = cookieRead('scoreboard_' + i + '_name');
-            aCell4.textContent = cookieRead('scoreboard_' + i + '_date');
-            aCell5.textContent = cookieRead('scoreboard_' + i + '_time') + ' seconds';
+            }
         }
-        else {
-            aCellR.textContent = i + 1;
-            aCell1.textContent = '';
-            aCell2.textContent = '';
-            aCell3.textContent = '';
-            aCell4.textContent = '';
-            aCell5.textContent = '';
 
-        }
 
         aRow.appendChild(aCellR);
         aRow.appendChild(aCell1);

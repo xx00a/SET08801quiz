@@ -5,6 +5,7 @@ html {
 body {
 
 }
+
 article, aside, footer, header {
     padding: 0.6rem;
     box-sizing: border-box;
@@ -155,8 +156,6 @@ thead
     padding: 10px;
 }
 
-
-/* larger screen */
 @media screen and (min-width: 30rem) {
     body {
         display: flex;
@@ -168,15 +167,15 @@ thead
         display: flex;
         flex-wrap: wrap;
         box-sizing: border-box;
-        border-bottom: 0.5rem solid;
+        border-bottom: 0.2rem solid #ccc;
     }
     nav, header {
         order: -1;
     }
     article {
-        flex: 80%;
+        flex: 75%;
     }
     aside {
-        flex: 20%;
+        flex: 25%;
     }
 }

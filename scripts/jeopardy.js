@@ -236,9 +236,11 @@ function finishGame()
 
 async function getJSONfromJeopardy()
 {
-    //const pointerURL = 'https://jservice.io/api/random?count=1';
+    // production URL
+    const pointerURL = 'https://jservice.io/api/random?count=1';
 
-    const pointerURL = 'https://xx00a.github.io/SET08801quiz/scripts/test.json';
+    // debug URL
+    // const pointerURL = 'https://xx00a.github.io/SET08801quiz/scripts/test.json';
 
     const request = new Request(pointerURL);
     const response =  await fetch(request);
