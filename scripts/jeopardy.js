@@ -214,11 +214,11 @@ function finishGame()
     // let's write our scoreboard to... cookies
     for (let i = 0; i < sBLen; i++) {
         // final score, questions answered, name, date/time, time taken
-        cookieSet(currentGameNo+'scoreboard_'+i+'_score',globalScoreboard[i][0]);
-        cookieSet(currentGameNo+'scoreboard_'+i+'_questions',globalScoreboard[i][1]);
-        cookieSet(currentGameNo+'scoreboard_'+i+'_name',globalScoreboard[i][2]);
-        cookieSet(currentGameNo+'scoreboard_'+i+'_date',globalScoreboard[i][3]);
-        cookieSet(currentGameNo+'scoreboard_'+i+'_time',globalScoreboard[i][4]);
+        cookieSet('scoreboard_'+i+'_score',globalScoreboard[i][0]);
+        cookieSet('scoreboard_'+i+'_questions',globalScoreboard[i][1]);
+        cookieSet('scoreboard_'+i+'_name',globalScoreboard[i][2]);
+        cookieSet('scoreboard_'+i+'_date',globalScoreboard[i][3]);
+        cookieSet('scoreboard_'+i+'_time',globalScoreboard[i][4]);
     }
 
 
