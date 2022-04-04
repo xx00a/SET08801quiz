@@ -120,11 +120,13 @@ function fillResults()
 
 function gameSet(name)
 {
+    if (name === '')
+    {
+        name = 'Anonymous';
+    }
 
-    cookieSet("game_number",Math.random()*10000000);
+    cookieSet("game_number",Math.random());
     cookieSet("game_name",name);
-
-    alert(cookieRead("game_number"));
 
     window.location = "game_do.html";
 }
