@@ -217,13 +217,7 @@ function finishGame()
         globalScoreboard[9][4] = sumTime;
     }
 
-
-    console.table(globalScoreboard);
-
     globalScoreboard.sort(function(a,b) {return b[0]-a[0]});
-
-    console.table(globalScoreboard);
-
 
     // let's write our scoreboard to... cookies
     for (let i = 0; i < sBLen; i++) {
@@ -234,6 +228,8 @@ function finishGame()
         cookieSet('scoreboard_'+i+'_date',globalScoreboard[i][3]);
         cookieSet('scoreboard_'+i+'_time',globalScoreboard[i][4]);
     }
+
+    cookieSet("game_final_score",sumScore);
 
     window.location = "game_finish.html";
 }
