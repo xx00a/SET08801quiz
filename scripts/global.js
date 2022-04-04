@@ -73,8 +73,6 @@ function fillResults()
     // let's build rows of cookie values
     for (let i = 0; i < 10; i++) {
 
-        alert('scoreboard_'+i+'_date');
-
         const aRow = document.createElement('tr');
         const aCellR = document.createElement('td');
         const aCell1 = document.createElement('td');
@@ -83,25 +81,23 @@ function fillResults()
         const aCell4 = document.createElement('td');
         const aCell5 = document.createElement('td');
 
-        if ( cookieRead('scoreboard_'+i+'_date') === '')
-        {
-            // we know there is no data
-            aCellR.textContent = i + 1;
-            aCell1.textContent = '-';
-            aCell2.textContent = '-';
-            aCell3.textContent = '-';
-            aCell4.textContent = '-';
-            aCell5.textContent = '-';
+        if  (typeof cookieRead('scoreboard_'+i+'_score') !== 'undefined') {
 
-        }
-        else
-        {
             aCellR.textContent = i + 1;
-            aCell1.textContent = cookieRead('scoreboard_'+i+'_score');
-            aCell2.textContent = cookieRead('scoreboard_'+i+'_questions');
-            aCell3.textContent = cookieRead('scoreboard_'+i+'_name');
-            aCell4.textContent = cookieRead('scoreboard_'+i+'_date');
-            aCell5.textContent = cookieRead('scoreboard_'+i+'_time');
+            aCell1.textContent = '£' + cookieRead('scoreboard_' + i + '_score');
+            aCell2.textContent = cookieRead('scoreboard_' + i + '_questions') + ' completed';
+            aCell3.textContent = cookieRead('scoreboard_' + i + '_name');
+            aCell4.textContent = cookieRead('scoreboard_' + i + '_date');
+            aCell5.textContent = cookieRead('scoreboard_' + i + '_time') + ' seconds';
+        }
+        else {
+            aCellR.textContent = i + 1;
+            aCell1.textContent = '';
+            aCell2.textContent = '';
+            aCell3.textContent = '';
+            aCell4.textContent = '';
+            aCell5.textContent = '';
+
         }
 
         aRow.appendChild(aCellR);

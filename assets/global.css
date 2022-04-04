@@ -53,6 +53,7 @@ nav apptitle
     padding-top: 10px;
 }
 nav a {
+    border-radius: 6px;
     text-align: center;
     margin: 5px;
     padding: 15px 10px;
@@ -64,7 +65,7 @@ nav a {
 
 nav a:hover {
     background-color: #2A99FB;
-    border-radius: 2px;
+    border-radius: 6px;
     outline: 1px solid #2A99FB;
 }
 
@@ -143,6 +144,16 @@ input[type=text], input[type=submit]
     padding: 0px 15px;
 }
 
+td
+{
+    padding: 5px;
+}
+
+thead
+{
+    background-color: #D3D3D3;
+    padding: 10px;
+}
 
 
 /* larger screen */
