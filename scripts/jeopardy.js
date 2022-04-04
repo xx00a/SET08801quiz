@@ -189,12 +189,14 @@ function finishGame()
 
     // let's read our master cookies, put them in an array and sort
     for (let i = 0; i < sBLen; i++) {
-        // final score, questions answered, name, date/time, time taken
-        globalScoreboard[i][0] = parseInt(cookieRead('scoreboard_'+i+'_score'));
-        globalScoreboard[i][1] = parseInt(cookieRead('scoreboard_'+i+'_questions'));
-        globalScoreboard[i][2] = cookieRead('scoreboard_'+i+'_name');
-        globalScoreboard[i][3] = cookieRead('scoreboard_'+i+'_date');
-        globalScoreboard[i][4] = parseInt(cookieRead('scoreboard_'+i+'_time'));
+        // let's load our scoreboard from cookies
+        if  (typeof cookieRead('scoreboard_'+i+'_date') !== 'undefined') {
+            globalScoreboard[i][0] = parseInt(cookieRead('scoreboard_'+i+'_score'));
+            globalScoreboard[i][1] = parseInt(cookieRead('scoreboard_'+i+'_questions'));
+            globalScoreboard[i][2] = cookieRead('scoreboard_'+i+'_name');
+            globalScoreboard[i][3] = cookieRead('scoreboard_'+i+'_date');
+            globalScoreboard[i][4] = parseInt(cookieRead('scoreboard_'+i+'_time'));
+        }
     }
 
     // sort results
