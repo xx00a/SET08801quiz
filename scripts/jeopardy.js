@@ -2,12 +2,17 @@
 // global variables and default data for the game session
 let currentGameName = cookieRead('game_name');
 let currentGameNo = cookieRead('game_number') + '_';
+
+// json variables
+let jsonTitle, jsonValue, jsonQuestion, jsonAnswer = "-1";
+
 let currentQuestion = 0;
+
 let currentScore = 0;
-let currentAnswer = "";
 let currentSeconds = 0;
-let currentValue = 0;
+
 let questionsExhausted = false;
+
 let inPlay = false;
 let questionsComplete = [false,false,false,false,false,false,false,false,false,false,false];
 let questionsTime = [0,0,0,0,0,0,0,0,0,0,0];
@@ -46,11 +51,9 @@ function titleCase(str) {
     return str.join(' ');
 }
 
-// set timer
+// set timers
 let currentTime = new Date();
 let countDownTime = new Date();
-//countDownTime.setTime(currentTime.getTime() + 800000);
-
 let globalTimer;
 
 function countDown()
@@ -81,7 +84,10 @@ function countDown()
 }
 
 
-function startGame(name,gameNumber) {
+async function startGame(name,gameNumber) {
+
+    // let's get our first question
+    await getJSONfromJeopardy();
 
     playQuestion(1);
 
@@ -237,23 +243,19 @@ function finishGame()
 
 async function getJSONfromJeopardy()
 {
-    const debugReturn = '[{"id":107928,"answer":"Eggo (Eggos accepted)","question":"With varieties like Blueberry \u0026 Nutri-Grain Cinnamon, these waffles from Kelloggs have you going in circles","value":600,"airdate":"2010-09-29T12:00:00.000Z","created_at":"2014-02-14T02:14:47.008Z","updated_at":"2014-02-14T02:14:47.008Z","category_id":14608,"game_id":null,"invalid_count":null,"category":{"id":14608,"title":"a freezer full of food","created_at":"2014-02-14T02:14:46.240Z","updated_at":"2014-02-14T02:14:46.240Z","clues_count":5}}]';
-//    const debugReturn = '[{"id":115334,"answer":"a Ring","question":"From Topps, this item that you wear on your finger has a \\"gem\\" made of candy","value":400,"airdate":"2013-07-29T12:00:00.000Z","created_at":"2014-02-14T02:44:56.527Z","updated_at":"2014-02-14T02:44:56.527Z","category_id":15727,"game_id":null,"invalid_count":null,"category":{"id":15727,"title":"candy is dandy","created_at":"2014-02-14T02:44:56.145Z","updated_at":"2014-02-14T02:44:56.145Z","clues_count":10}}]';
-    //const pointerURL = 'https://jservice.io/api/random?count=1';
-    //const pointerURL = 'https://jservice.io/api/random?count=1';
+    const pointerURL = 'https://jservice.io/api/random?count=1';
 
+    //const pointerURL = 'https://xx00a.github.io/SET08801quiz/scripts/test.json';
 
-    const theRequest = new Request(pointerURL);
+    const request = new Request(pointerURL);
+    const response =  await fetch(request);
+    const data = await response.json();
 
-    const aResponse = await fetch(theRequest);
+    jsonTitle = data[0]['category']['title'];
+    jsonValue = data[0]['value'];
+    jsonQuestion = data[0]['question'];
+    jsonAnswer = data[0]['answer'];
 
-    //console.log(await aResponse.text());
-
-    const jeopardyData = await aResponse.json();
-
-
-
-    return debugReturn;
 }
 
 
@@ -272,20 +274,9 @@ function doQuestion(questionNo)
     }
     else
     {
-   // start timer and game
+        // start timer and game
         globalTimer = setInterval( countDown,1000);
         inPlay = true;
-
-        // call jSon data
-        const rawQuestionData = getJSONfromJeopardy();
-
-        const questionData = JSON.parse(rawQuestionData);
-
-        // update current answer - we convert to lower case to make it non-case-sensitive
-        currentAnswer = questionData[0]['answer'];
-
-        // update value of answer
-        currentValue = questionData[0]['value'];
 
         //start audio
         document.getElementById("audio-idle").pause();
@@ -298,9 +289,9 @@ function doQuestion(questionNo)
         document.getElementById("gameform").style.visibility = "visible";
         document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
         document.getElementById("app_question_no").innerHTML = "Question "+currentQuestion;
-        document.getElementById("app_question_cat").innerHTML = "Category is "+titleCase(questionData[0]['category']['title']) + " for £" + questionData[0]['value'];
+        document.getElementById("app_question_cat").innerHTML = "Category is "+titleCase(jsonTitle) + " for £" + jsonValue;
         document.getElementById("question"+currentQuestion+"_link").style.backgroundColor = "#F1F9FF";
-        document.getElementById("app_question").innerHTML = questionData[0]['question'] + ":";
+        document.getElementById("app_question").innerHTML = jsonQuestion + ":";
         document.getElementById("gamenext").style.visibility = "hidden";
 
 
@@ -320,7 +311,7 @@ function submitQuestion () {
     // update interface
     document.getElementById("gameform").style.visibility = "hidden";
     document.getElementById("app_msg").style.color = "black";
-    document.getElementById("app_msg").innerHTML = "<strong>The answer is: </strong>" +currentAnswer+"";
+    document.getElementById("app_msg").innerHTML = "<strong>The answer is: </strong>" + jsonAnswer +"";
 
     // let's guide the user to end the game
     if (currentQuestion === 10)
@@ -329,32 +320,36 @@ function submitQuestion () {
         document.getElementById("nextBtn").value = "Finish Game";
     }
 
-
     // convert answer for comparison
     let theAnswer = document.getElementsByName('playerResponse')[0].value;
-    let currentAnswerTmp = currentAnswer.toLowerCase();
+    let currentAnswerTmp = jsonAnswer.toLowerCase();
 
     theAnswer = theAnswer.toLowerCase();
 
+
     if (theAnswer === currentAnswerTmp)
     {
+        // update master variables
+        document.getElementById("question"+currentQuestion+"_link").innerText = "Question " + currentQuestion + ": £" + jsonValue;
+        currentScore = currentScore + jsonValue;
+
         // do celebration
         playWin();
 
-        // update master variables
-        document.getElementById("question"+currentQuestion+"_link").innerText = "Question " + currentQuestion + ": £" + currentValue;
-        currentScore = currentScore + currentValue;
-
-
+        // let's ask for our next request
+        getJSONfromJeopardy();
     }
     else
     {
+        // update master variables
+        document.getElementById("question"+currentQuestion+"_link").innerText = "Question " + currentQuestion + ": £0";
+        currentScore = currentScore - jsonValue;
+
         // they lose
         playLoser();
 
-        // update master variables
-        document.getElementById("question"+currentQuestion+"_link").innerText = "Question " + currentQuestion + ": £0";
-        currentScore = currentScore - currentValue;
+        // let's ask for our next request
+        getJSONfromJeopardy();
 
         if (currentScore < 0) { currentScore = 0; }
 

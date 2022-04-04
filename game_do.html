@@ -65,14 +65,18 @@
     </video>
     <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
 </div>
-<div id="layer-lose" class="videoDialog" style="visibility: hidden;" height="360">
-    <video preload="auto" id="video-lose" onclick="hideVideo();">
+<div id="layer-lose" class="videoDialog" style="visibility: hidden;">
+    <video preload="auto" id="video-lose" onclick="hideVideo();" height="360">
         <source src="assets/JeopardyWrong.mp4" type="video/mp4">
     </video>
     <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
 </div>
 <script>
+
+    //getJSONfromJeopardy();
+
     startGame(cookieRead("game_name"), cookieRead("game_number"));
+
 </script>
 </body>
 </html>
