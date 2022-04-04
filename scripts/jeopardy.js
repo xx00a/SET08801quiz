@@ -186,11 +186,11 @@ function finishGame()
     // let's read our master cookies, put them in an array and sort
     for (let i = 0; i < sBLen; i++) {
         // final score, questions answered, name, date/time, time taken
-       /* globalScoreboard[i][0] = parseInt(cookieRead('scoreboard_'+i+'_score'));
+        globalScoreboard[i][0] = parseInt(cookieRead('scoreboard_'+i+'_score'));
         globalScoreboard[i][1] = parseInt(cookieRead('scoreboard_'+i+'_questions'));
         globalScoreboard[i][2] = cookieRead('scoreboard_'+i+'_name');
         globalScoreboard[i][3] = cookieRead('scoreboard_'+i+'_date');
-        globalScoreboard[i][4] = parseInt(cookieRead('scoreboard_'+i+'_time')); */
+        globalScoreboard[i][4] = parseInt(cookieRead('scoreboard_'+i+'_time'));
     }
 
     // sort results
@@ -211,6 +211,14 @@ function finishGame()
         globalScoreboard[9][4] = sumTime;
     }
 
+
+    console.table(globalScoreboard);
+
+    globalScoreboard.sort(function(a,b) {return b[0]-a[0]});
+
+    console.table(globalScoreboard);
+
+
     // let's write our scoreboard to... cookies
     for (let i = 0; i < sBLen; i++) {
         // final score, questions answered, name, date/time, time taken
@@ -221,12 +229,6 @@ function finishGame()
         cookieSet('scoreboard_'+i+'_time',globalScoreboard[i][4]);
     }
 
-
-    console.table(globalScoreboard);
-
-    globalScoreboard.sort(function(a,b) {return b[0]-a[0]});
-
-    console.table(globalScoreboard);
 
     alert('game over');
 
