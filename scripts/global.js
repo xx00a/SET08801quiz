@@ -73,6 +73,8 @@ function fillResults()
     // let's build rows of cookie values
     for (let i = 0; i < 10; i++) {
 
+        alert(cookieRead('scoreboard_'+i+'_date'));
+
         const aRow = document.createElement('tr');
         const aCellR = document.createElement('td');
         const aCell1 = document.createElement('td');
