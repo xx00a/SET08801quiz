@@ -7,10 +7,8 @@ let currentGameNo = cookieRead('game_number') + '_';
 let jsonTitle, jsonValue, jsonQuestion, jsonAnswer = "-1";
 
 let currentQuestion = 0;
-
 let currentScore = 0;
 let currentSeconds = 0;
-
 let questionsExhausted = false;
 
 let inPlay = false;
@@ -243,9 +241,9 @@ function finishGame()
 
 async function getJSONfromJeopardy()
 {
-    const pointerURL = 'https://jservice.io/api/random?count=1';
+    //const pointerURL = 'https://jservice.io/api/random?count=1';
 
-    //const pointerURL = 'https://xx00a.github.io/SET08801quiz/scripts/test.json';
+    const pointerURL = 'https://xx00a.github.io/SET08801quiz/scripts/test.json';
 
     const request = new Request(pointerURL);
     const response =  await fetch(request);
@@ -288,8 +286,8 @@ function doQuestion(questionNo)
         document.getElementById("app_msg").style.color = "green";
         document.getElementById("gameform").style.visibility = "visible";
         document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
-        document.getElementById("app_question_no").innerHTML = "Question "+currentQuestion;
-        document.getElementById("app_question_cat").innerHTML = "Category is "+titleCase(jsonTitle) + " for £" + jsonValue;
+        document.getElementById("app_question_no").innerHTML = "Question "+currentQuestion+jsonAnswer;
+        document.getElementById("app_question_cat").innerHTML = "For £" + jsonValue + ", the category is: "+titleCase(jsonTitle);
         document.getElementById("question"+currentQuestion+"_link").style.backgroundColor = "#F1F9FF";
         document.getElementById("app_question").innerHTML = jsonQuestion + ":";
         document.getElementById("gamenext").style.visibility = "hidden";
