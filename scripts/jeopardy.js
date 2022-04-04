@@ -1,7 +1,7 @@
 
 // global variables and default data for the game session
 let currentGameName = cookieRead('game_name');
-let currentGameNo = parseInt(cookieRead('game_number'));
+let currentGameNo = cookieRead('game_number') + '_';
 let currentQuestion = 0;
 let currentScore = 0;
 let currentAnswer = "";
@@ -151,7 +151,7 @@ function playQuestion(questionNo)
 
                 // startTheGame
                 doQuestion(currentQuestion);
-                cookieSet("app-game-question",currentQuestion);
+                cookieSet(currentGameNo + "app-game-question",currentQuestion);
 
             }
 
@@ -214,11 +214,11 @@ function finishGame()
     // let's write our scoreboard to... cookies
     for (let i = 0; i < sBLen; i++) {
         // final score, questions answered, name, date/time, time taken
-        cookieSet('scoreboard_'+i+'_score',globalScoreboard[i][0]);
-        cookieSet('scoreboard_'+i+'_questions',globalScoreboard[i][1]);
-        cookieSet('scoreboard_'+i+'_name',globalScoreboard[i][2]);
-        cookieSet('scoreboard_'+i+'_date',globalScoreboard[i][3]);
-        cookieSet('scoreboard_'+i+'_time',globalScoreboard[i][4]);
+        cookieSet(currentGameNo+'scoreboard_'+i+'_score',globalScoreboard[i][0]);
+        cookieSet(currentGameNo+'scoreboard_'+i+'_questions',globalScoreboard[i][1]);
+        cookieSet(currentGameNo+'scoreboard_'+i+'_name',globalScoreboard[i][2]);
+        cookieSet(currentGameNo+'scoreboard_'+i+'_date',globalScoreboard[i][3]);
+        cookieSet(currentGameNo+'scoreboard_'+i+'_time',globalScoreboard[i][4]);
     }
 
 
@@ -237,7 +237,7 @@ function doQuestion(questionNo)
 {
 
     // we need to check cookie to see if question has been completed
-    let questionDone = cookieRead("app-question-"+questionNo+"done");
+    let questionDone = cookieRead(currentGameNo+"app-question-"+questionNo+"done");
 
     if (questionDone === "True")
     {

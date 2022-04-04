@@ -31,7 +31,7 @@ function cookieRead(name)
 function gameSet(name)
 {
 
-    cookieSet("game_number",Math.random()*1000);
+    cookieSet("game_number",Math.random()*10000000);
     cookieSet("game_name",name);
 
     alert(cookieRead("game_number"));
