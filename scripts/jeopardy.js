@@ -251,6 +251,11 @@ async function getJSONfromJeopardy()
     jsonQuestion = data[0]['question'];
     jsonAnswer = data[0]['answer'];
 
+    if (jsonValue === null)
+    {
+        // let's give everyone a bonus for the error
+        jsonValue = 2000;
+    }
 }
 
 
