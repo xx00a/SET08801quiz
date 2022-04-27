@@ -1,9 +1,6 @@
-
-
 //// set Cookie value
 
-function cookieSet(name, value)
-{
+function cookieSet(name, value) {
     // create a date +30 days
     const theDate = new Date();
     theDate.setTime(theDate.getTime() + 2592000000)
@@ -15,11 +12,10 @@ function cookieSet(name, value)
 
 }
 
-function cookieRead(name)
-{
+function cookieRead(name) {
     const cookieName = name + "=";
     const cDecoded = decodeURIComponent(document.cookie);
-    const cArr = cDecoded .split('; ');
+    const cArr = cDecoded.split('; ');
     let res;
     cArr.forEach(val => {
         if (val.indexOf(cookieName) === 0) res = val.substring(cookieName.length);
@@ -28,20 +24,17 @@ function cookieRead(name)
 
 }
 
-function showResults()
-{
+function showResults() {
     // show final amount on results page
     document.getElementById("gamefinal").innerText = 'Your final score was £' + cookieRead('game_final_score');
 
 }
 
-function fillResults()
-{
+function fillResults() {
     const theArticle = document.querySelector('article');
 
     const aHeader = document.createElement('h1');
     const aTable = document.createElement('table');
-
 
 
     // fill out information as needed
@@ -88,16 +81,15 @@ function fillResults()
         const aCell4 = document.createElement('td');
         const aCell5 = document.createElement('td');
 
-        if  (typeof cookieRead('scoreboard_'+i+'_date') !== 'undefined') {
-            if  ( cookieRead('scoreboard_'+i+'_score') > 0) {
+        if (typeof cookieRead('scoreboard_' + i + '_date') !== 'undefined') {
+            if (cookieRead('scoreboard_' + i + '_score') > 0) {
                 aCellR.textContent = i + 1;
                 aCell1.textContent = '£' + cookieRead('scoreboard_' + i + '_score');
                 aCell2.textContent = cookieRead('scoreboard_' + i + '_questions') + ' completed';
                 aCell3.textContent = cookieRead('scoreboard_' + i + '_name');
                 aCell4.textContent = cookieRead('scoreboard_' + i + '_date');
                 aCell5.textContent = cookieRead('scoreboard_' + i + '_time') + ' seconds';
-            }
-            else {
+            } else {
                 aCellR.textContent = i + 1;
                 aCell1.textContent = '';
                 aCell2.textContent = '';
@@ -124,19 +116,16 @@ function fillResults()
     theArticle.appendChild(aTable);
 
 
-
 }
 
-function gameSet(name)
-{
-    if (name === '')
-    {
+function gameSet(name) {
+    if (name === '') {
         name = 'Anonymous';
     }
 
-    cookieSet("game_number",Math.random());
-    cookieSet("game_name",name);
-    cookieSet("game_final_score",0);
+    cookieSet("game_number", Math.random());
+    cookieSet("game_name", name);
+    cookieSet("game_final_score", 0);
 
     window.location = "game_do.html";
 }
