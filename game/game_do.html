@@ -9,13 +9,13 @@
 </head>
 <body>
 <header>
-        <nav>
-            <apptitle>SET08801 Jeopardy!</apptitle>
-            <a href="../index.html">Home</a>
-            <a href="index.html" style="background-color: #2A99FB;">Game</a>
-            <a href="../results/index.html">Results</a>
-            <a href="../help/index.html">Help</a>
-        </nav>
+    <nav>
+        <apptitle>SET08801 Jeopardy!</apptitle>
+        <a href="../index.html">Home</a>
+        <a href="index.html" style="background-color: #2A99FB;">Game</a>
+        <a href="../results/index.html">Results</a>
+        <a href="../help/index.html">Help</a>
+    </nav>
 </header>
 <main>
     <aside>
@@ -40,7 +40,10 @@
         <p id="app_question">&nbsp;</p>
         <p id="app_msg">&nbsp;</p>
         <div id="gameform" style="visibility: hidden;">
-            Answer: <input size="45" type="text" value="" name="playerResponse"/>
+            <label>
+                Answer:
+                <input size="45" type="text" value="" name="playerResponse"/>
+            </label>
             <input type="submit" onclick="submitQuestion();" value="Submit">
         </div>
         <div id="gamenext" style="visibility: hidden;">
@@ -72,7 +75,7 @@
     <p><a href="javascript:hideVideo();">Skip video &gt;</a></p>
 </div>
 <script>
-   startGame(cookieRead("game_name"), cookieRead("game_number"));
+    startGame(cookieRead("game_name"), cookieRead("game_number"));
 </script>
 </body>
 </html>

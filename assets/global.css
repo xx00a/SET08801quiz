@@ -2,6 +2,7 @@ html {
     background-color: #deded8;
     font-family: Arial, sans-serif;
 }
+
 body {
 
 }
@@ -17,17 +18,18 @@ header {
     text-align: center;
     border-bottom: 1px solid;
 }
+
 aside {
     background-color: white;
 
 }
 
 .videoDialogGood {
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-color: green;
     height: 100%;
     width: 100%;
@@ -35,24 +37,22 @@ aside {
 }
 
 .videoDialogBad {
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-color: darkred;
     height: 100%;
     width: 100%;
     text-align: center;
 }
 
-.videoDialogGood a
-{
+.videoDialogGood a {
     color: white;
 }
 
-.videoDialogBad a
-{
+.videoDialogBad a {
     color: white;
 }
 
@@ -63,13 +63,14 @@ nav {
     padding: 10px 0;
     font-size: 14px;
 }
-nav apptitle
-{
+
+nav apptitle {
     text-align: left;
     min-width: 20rem;
     font-size: 24px;
     padding-top: 10px;
 }
+
 nav a {
     border-radius: 6px;
     text-align: center;
@@ -102,16 +103,14 @@ sidemenu sidetitle {
 
 }
 
-sidemenu a
-{
+sidemenu a {
     font-size: 14px;
     padding: 7px 15px;
     color: #2899FB;
     border-radius: 5px;
 }
 
-sidemenu a:hover
-{
+sidemenu a:hover {
     background-color: #F1F9FF;
     outline: 1px solid #F1F9FF;
     border-radius: 5px;
@@ -127,12 +126,14 @@ article {
     outline: 1px solid #BCE0FD;
     padding: 20px;
 }
+
 h1 {
     color: #2A99FB;
     font-size: 28px;
     margin-top: 10px;
 
 }
+
 h2 {
     color: #5d5d5d;
     font-size: 22px;
@@ -141,8 +142,7 @@ h2 {
 }
 
 /* form elements */
-input[type=button], input[type=submit]
-{
+input[type=button], input[type=submit] {
     height: 40px;
     background-color: #2A99FB;
     font-size: 16px;
@@ -153,8 +153,7 @@ input[type=button], input[type=submit]
     padding: 0px 15px;
 }
 
-input[type=text], input[type=submit]
-{
+input[type=text], input[type=submit] {
     height: 40px;
     font-size: 16px;
     border: 2px solid #BCE0FD;
@@ -162,13 +161,11 @@ input[type=text], input[type=submit]
     padding: 0px 15px;
 }
 
-td
-{
+td {
     padding: 5px;
 }
 
-thead
-{
+thead {
     background-color: #D3D3D3;
     padding: 10px;
 }
@@ -180,18 +177,22 @@ thead
         max-width: 80rem;
         margin: auto;
     }
+
     main {
         display: flex;
         flex-wrap: wrap;
         box-sizing: border-box;
         border-bottom: 0.2rem solid #ccc;
     }
+
     nav, header {
         order: -1;
     }
+
     article {
         flex: 75%;
     }
+
     aside {
         flex: 25%;
     }
