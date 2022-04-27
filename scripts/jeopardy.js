@@ -265,7 +265,7 @@ function doQuestion(questionNo) {
         document.getElementById("app_msg").style.color = "green";
         document.getElementById("gameform").style.visibility = "visible";
         document.getElementById("score-total").innerHTML = "Total: £" + currentScore;
-        document.getElementById("app_question_no").innerHTML = "Question " + currentQuestion + jsonAnswer;
+        document.getElementById("app_question_no").innerHTML = "Question " + currentQuestion;
         document.getElementById("app_question_cat").innerHTML = "For £" + jsonValue + ", the category is: " + titleCase(jsonTitle);
         document.getElementById("question" + currentQuestion + "_link").style.backgroundColor = "#F1F9FF";
         document.getElementById("app_question").innerHTML = jsonQuestion + ":";
